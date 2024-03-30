@@ -20,7 +20,7 @@ MoDL is a deep learning-based software package for precise mitochondrial segment
 ***
 
 ## Executable file
-The executable files and usage instructions for MoDL can be found at "www.modl.com". 
+The executable files and usage instructions for MoDL can be found at "https://zenodo.org/records/10889134". 
 
 ## Requirements
 
@@ -71,7 +71,7 @@ You will need to prepare original mitochondrial images and ground truth to the *
 
 2. Train the model by running ***MoDL_seg/train.py***, then you will get a model for super-resolution microscopy images segmentation of mitochondrial, and the trained model will be saved in the *' model '* directory of the original MoDL demo.
 
-3. (Optional) Also, you can directly use our pre-trained model ***U-RNet+*** to predict [here], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
+3. (Optional) Also, you can directly use our pre-trained model ***U-RNet+*** to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
 
 4. Prepare the test images and use the trained model to make segmentation by running ***MoDL_seg/segment_predict.py***. 
 You will need to prepare the test images to the *' testraw '* directory of the original MoDL demo. After prediction, the predicted segmentations and their pseudo-color implementation are stored separately in the *' final_results/bw '* and *' final_results/pseudo '* directories of the original MoDL demo.
@@ -83,7 +83,7 @@ You need to prepare the training set, segment it into 8-bit images using MoDL, a
 
 2. Train the model by running ***MoDL_pre/train.py***, then you will get models for mitochondrial function prediction, and the trained model will be stored in the *' model '* directory of the original MoDL demo.
 
-3. (Optional) Also, you can directly use our pre-trained model to predict [here], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
+3. (Optional) Also, you can directly use our pre-trained model to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
 
 4. Prepare the test images and use the trained model to make predictions by running ***MoDL_pre/function prediction.py***. Here, we have prepared data for five cell lines: HeLa, HepG2, U87, L02, and 143B. After running ***function_prediction.py***, you will be prompted to input the name of the cell line. The predictions will be stored in the ***function_predictions.csv*** file within the *'final_results'* directory. 
 
