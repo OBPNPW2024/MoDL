@@ -69,9 +69,9 @@ To use this project, follow these steps:
 1. Prepare the training data by running ***MoDL_seg/data_load.py***. 
 You will need to prepare original mitochondrial images and ground truth to the *' deform/train '* and *' deform/label '* directories of the original MoDL demo. 
 
-2. Train the model by running ***MoDL_seg/train.py***, then you will get a model for super-resolution microscopy images segmentation of mitochondrial, and the trained model will be saved in the *' model '* directory of the original MoDL demo.
+2. (Optional) You can directly use our pre-trained model ***U-RNet+*** to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
 
-3. (Optional) Also, you can directly use our pre-trained model ***U-RNet+*** to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
+3. (Optional) Train the model by running ***MoDL_seg/train.py***, then you will get a model for super-resolution microscopy images segmentation of mitochondrial, and the trained model will be saved in the *' model '* directory of the original MoDL demo.
 
 4. Prepare the test images and use the trained model to make segmentation by running ***MoDL_seg/segment_predict.py***. 
 You will need to prepare the test images to the *' testraw '* directory of the original MoDL demo. After prediction, the predicted segmentations and their pseudo-color implementation are stored separately in the *' final_results/bw '* and *' final_results/pseudo '* directories of the original MoDL demo.
@@ -81,18 +81,20 @@ You will need to prepare the test images to the *' testraw '* directory of the o
 1. Prepare the training data by running morphology_analysis.py.
 You need to prepare the training set, segment it into 8-bit images using MoDL, and store them in the  *'final_results/bw '* directory. Then, use ***morphology_analysis.py*** to extract the morphological features of these images and generate a ***.csv*** file, saving in the *'final_results/bw/512x512_pixels'* directory. Taking *'deform/train/function_pre/U87 cell.csv'* as an example.
 
-2. Train the model by running ***MoDL_pre/train.py***, then you will get models for mitochondrial function prediction, and the trained model will be stored in the *' model '* directory of the original MoDL demo.
+2. You can directly use our pre-trained model to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
 
-3. (Optional) Also, you can directly use our pre-trained model to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
+3. (Optional) Train the model by running ***MoDL_pre/train.py***, then you will get models for mitochondrial function prediction, and the trained model will be stored in the *' model '* directory of the original MoDL demo.
 
 4. Prepare the test images and use the trained model to make predictions by running ***MoDL_pre/function prediction.py***. Here, we have prepared data for five cell lines: HeLa, HepG2, U87, L02, and 143B. After running ***function_prediction.py***, you will be prompted to input the name of the cell line. The predictions will be stored in the ***function_predictions.csv*** file within the *'final_results'* directory. 
 
 ***
 ##**A specific file description are as follows:**
 ##Data Preparation
-1. Place the training images in the *' deform/train '* directory for mitochondrial segmentation. Place the training ***.csv*** file in the *' deform/function_pre '* directory for mitochondrial function prediction. 
+1. To reduce computational cost and improves training efficiency, the original full 2048×2048 pixels images were cropped into multiple 512×512 pixels patches.
 
-2. Place the corresponding labels in the *' deform/label '* directory, run the ***data_load.py*** to convert the images and labels into .npy format.
+2. Place the training images (512x512 pixels) in the *' deform/train '* directory for mitochondrial segmentation. Place the training ***.csv*** file in the *' deform/function_pre '* directory for mitochondrial function prediction. 
+
+3. Place the corresponding labels in the *' deform/label '* directory, run the ***data_load.py*** to convert the images and labels into .npy format.
 
 
 ##Model Training
@@ -104,11 +106,11 @@ You need to prepare the training set, segment it into 8-bit images using MoDL, a
 
 
 ##Model Prediction
-1. Place the test images to be segmented in the *' testraw '* directory.
+1. Place the test images (2048x2048 pixels) to be segmented in the *' testraw '* directory.
 
 2. Run the ***MoDL_seg/segment_predict.py*** to make segmentation using the trained model.
 
-3. The predicted segmentations of patches in three ways (4×4 patches, 4×3 patches, 3×4 patches) and their pseudo-color implementation are stored separately in the corresponding *' results/results_xx/bw '* and *' results/results_xx/pseudo '* directories.
+3. The predicted segmentations of patches in three ways (4×4 patches, 4×3 patches, 3×4 patches). The 4×4 patches were used to stitch together a complete 2048x2048 pixels resolution image, while the 4×3 and 3×4 patches were used to fill the seams produced during the stitching process. The pseudo-color implementation are stored separately in the corresponding *' results/results_xx/bw '* and *' results/results_xx/pseudo '* directories.
 
 4. The final merged segmentations of three ways and their pseudo-color implementation are stored separately in the *' final_results/bw '* and *' final_results/pseudo '* directories.
 
