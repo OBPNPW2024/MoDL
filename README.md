@@ -45,13 +45,13 @@ The inference process has been tested with:
 git clone https://github.com/OBPNPU2024/MoDL.git
 ```
 
-5. Open the terminal in the MoDL directory, install the required dependencies using pip:
+4. Open the terminal in the MoDL directory, install the required dependencies using pip:
 
 ```
 pip install -r requirements.txt
 ```
 
-6. (Optional) If you have had the CUDA environment installed properly, run:
+5. (Optional) If you have had the CUDA environment installed properly, run:
 
 ```
 pip install tensorflow-gpu=2.5.0
