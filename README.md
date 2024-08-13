@@ -69,7 +69,7 @@ To use this project, follow these steps:
 1. Prepare the training data by running ***MoDL_seg/data_load.py***. 
 You will need to prepare original mitochondrial images and ground truth to the *' deform/train '* and *' deform/label '* directories of the original MoDL demo. 
 
-2. (Optional) You can directly use our pre-trained model ***U-RNet+*** to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
+2. You can directly use our pre-trained model ***U-RNet+*** to predict [https://zenodo.org/records/10889134], You will need to download it and unzip it to the *' model '* directory of the original MoDL demo.
 
 3. (Optional) Train the model by running ***MoDL_seg/train.py***, then you will get a model for super-resolution microscopy images segmentation of mitochondrial, and the trained model will be saved in the *' model '* directory of the original MoDL demo.
 
