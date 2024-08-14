@@ -29,7 +29,7 @@ MoDL is built with Python and Tensorflow. Technically there are no limits to the
 The inference process has been tested with:
 
  * Windows 11 (version 23H2)
- * Python 3.7 (64 bit)
+ * Python 3.8.0 (64 bit)
  * tensorflow 2.5.0
  * 11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz
  * NVIDIA GeForce RTX 3060 Ti
@@ -38,7 +38,7 @@ The inference process has been tested with:
 
 ## Installation
 
-1. Install python 3.7 
+1. Install python 3.8.0 
 2. (Optional) If your computer has a CUDA-enabled GPU, install the CUDA and CUDNN of the proper version.
 3. The directory tree has been built. Download the MoDL_main.zip and unpack it, or clone the repository: 
 ```
