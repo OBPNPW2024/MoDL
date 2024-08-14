@@ -5,7 +5,7 @@ import joblib
 
 
 
-train_path = '..\\deform\\function_pre\\U87 cell.csv'
+train_path = '../deform/function_pre/U87 cell.csv'
 
 train_data = pd.read_csv(train_path)
 
@@ -71,9 +71,10 @@ X_train_3_MMP = pd.concat([X_train_2_MMP, pd.DataFrame(lgb1_preds_train_MMP, col
 
 xgb2_MMP.fit(X_train_3_MMP, y_train_MMP)
 
-joblib.dump(xgb1_MMP, '..\\model\\xgb1_MMP.pkl')
-joblib.dump(lgb1_MMP, '..\\model\\lgb1_MMP.pkl')
-joblib.dump(xgb2_MMP, '..\\model\\xgb2_MMP.pkl')
+joblib.dump(xgb1_MMP, '../model/xgb1_MMP.pkl')
+joblib.dump(lgb1_MMP, '../model/lgb1_MMP.pkl')
+joblib.dump(xgb2_MMP, '../model/xgb2_MMP.pkl')
+print("MMP model completed")
 
 # ATP
 xgb1_ATP = XGBRegressor(
@@ -129,10 +130,10 @@ X_train_3_ATP = pd.concat([X_train_2_ATP, pd.DataFrame(lgb1_preds_train_ATP, col
 
 xgb2_ATP.fit(X_train_3_ATP, y_train_ATP)
 
-joblib.dump(xgb1_ATP, '..\\model\\xgb1_ATP.pkl')
-joblib.dump(lgb1_ATP, '..\\model\\lgb1_ATP.pkl')
-joblib.dump(xgb2_ATP, '..\\model\\xgb2_ATP.pkl')
-
+joblib.dump(xgb1_ATP, '../model/xgb1_ATP.pkl')
+joblib.dump(lgb1_ATP, '../model/lgb1_ATP.pkl')
+joblib.dump(xgb2_ATP, '../model/xgb2_ATP.pkl')
+print("ATP model completed")
 
 # ROS
 xgb1_ROS = XGBRegressor(
@@ -188,9 +189,10 @@ X_train_3_ROS = pd.concat([X_train_2_ROS, pd.DataFrame(lgb1_preds_train_ROS, col
 
 xgb2_ROS.fit(X_train_3_ROS, y_train_ROS)
 
-joblib.dump(xgb1_ROS, '..\\model\\xgb1_ROS.pkl')
-joblib.dump(lgb1_ROS, '..\\model\\lgb1_ROS.pkl')
-joblib.dump(xgb2_ROS, '..\\model\\xgb2_ROS.pkl')
+joblib.dump(xgb1_ROS, '../model/xgb1_ROS.pkl')
+joblib.dump(lgb1_ROS, '../model/lgb1_ROS.pkl')
+joblib.dump(xgb2_ROS, '../model/xgb2_ROS.pkl')
+print("ROS model completed")
 
 # respiration
 xgb1_respiration = XGBRegressor(
@@ -246,9 +248,10 @@ X_train_3_respiration = pd.concat([X_train_2_respiration, pd.DataFrame(lgb1_pred
 
 xgb2_respiration.fit(X_train_3_respiration, y_train_respiration)
 
-joblib.dump(xgb1_respiration, '..\\model\\xgb1_respiration.pkl')
-joblib.dump(lgb1_respiration, '..\\model\\lgb1_respiration.pkl')
-joblib.dump(xgb2_respiration, '..\\model\\xgb2_respiration.pkl')
+joblib.dump(xgb1_respiration, '../model/xgb1_respiration.pkl')
+joblib.dump(lgb1_respiration, '../model/lgb1_respiration.pkl')
+joblib.dump(xgb2_respiration, '../model/xgb2_respiration.pkl')
+print("respiration model completed")
 
 # mitophagy
 xgb1_mitophagy = XGBRegressor(
@@ -304,6 +307,8 @@ X_train_3_mitophagy = pd.concat([X_train_2_mitophagy, pd.DataFrame(lgb1_preds_tr
 
 xgb2_mitophagy.fit(X_train_3_mitophagy, y_train_mitophagy)
 
-joblib.dump(xgb1_mitophagy, '..\\model\\xgb1_mitophagy.pkl')
-joblib.dump(lgb1_mitophagy, '..\\model\\lgb1_mitophagy.pkl')
-joblib.dump(xgb2_mitophagy, '..\\model\\xgb2_mitophagy.pkl')
+joblib.dump(xgb1_mitophagy, '../model/xgb1_mitophagy.pkl')
+joblib.dump(lgb1_mitophagy, '../model/lgb1_mitophagy.pkl')
+joblib.dump(xgb2_mitophagy, '../model/xgb2_mitophagy.pkl')
+print("mitophagy model completed")
+print("All done")

@@ -12,20 +12,20 @@ from skimage.morphology import convex_hull_image
 import pandas as pd
 
 
-
 def load_and_skeletonize_image(file_path):
     image = io.imread(file_path)
     binary_image = image > 0
     skeleton = morphology.skeletonize(binary_image)
     return skeleton
 
+
 def eight_neighbors(x, y, image):
-        VIII_neighbors = [image[x, y - 1], image[x - 1, y - 1], image[x - 1, y], image[x - 1, y + 1],
-                          image[x, y + 1], image[x + 1, y + 1], image[x + 1, y], image[x + 1, y - 1]]
-        return VIII_neighbors
+    VIII_neighbors = [image[x, y - 1], image[x - 1, y - 1], image[x - 1, y], image[x - 1, y + 1],
+                      image[x, y + 1], image[x + 1, y + 1], image[x + 1, y], image[x + 1, y - 1]]
+    return VIII_neighbors
+
 
 def getSkeletonIntersection(skeleton):
-
     validIntersection = [[0, 1, 0, 1, 0, 0, 1, 0], [0, 0, 1, 0, 1, 0, 0, 1], [1, 0, 0, 1, 0, 1, 0, 0],
                          [0, 1, 0, 0, 1, 0, 1, 0], [0, 0, 1, 0, 0, 1, 0, 1], [1, 0, 0, 1, 0, 0, 1, 0],
                          [0, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 0, 1, 0, 0], [0, 1, 0, 0, 0, 1, 0, 1],
@@ -58,13 +58,16 @@ def getSkeletonIntersection(skeleton):
     intersections = list(set(intersections));
     return intersections;
 
+
 def measurement(directory_path, save_path):
     database = pd.DataFrame([[0] * 103],
-                            columns=['cell_name', 'cell_mean_mito_area_(pixels_squared)', 'cell_median_mito_area_(pixels_squared)',
+                            columns=['cell_name', 'cell_mean_mito_area_(pixels_squared)',
+                                     'cell_median_mito_area_(pixels_squared)',
                                      'cell_std_mito_area_(pixels_squared)', 'cell_mean_mito_eccentricity',
                                      'cell_median_mito_eccentricity', 'cell_std_mito_eccentricity',
                                      'cell_mean_mito_equi_diameter_(pixels)', 'cell_median_mito_equi_diameter_(pixels)',
-                                     'cell_std_mito_equi_diameter_(pixels)', 'cell_mean_mito_euler_number','cell_std_mito_euler_number',
+                                     'cell_std_mito_equi_diameter_(pixels)', 'cell_mean_mito_euler_number',
+                                     'cell_std_mito_euler_number',
                                      'cell_mean_mito_extent',
                                      'cell_median_mito_extent', 'cell_std_mito_extent',
                                      'cell_mean_mito_major_axis_(pixels)',
@@ -163,11 +166,11 @@ def measurement(directory_path, save_path):
             try:
                 file_path = os.path.join(directory_path, file)
                 img = cv2.imread(file_path)
-                img = img[:,:,0]
-                print("Test", file, f'Test [{np.round(100*(test_num/total_file_count),2)}%]')
-                scale =1
+                img = img[:, :, 0]
+                print("Test", file, f'Test [{np.round(100 * (test_num / total_file_count), 2)}%]')
+                scale = 1
 
-                #独立线粒体测试
+                # 独立线粒体测试
                 mito_labels = measure.label(np.array(img), connectivity=2)
                 mito_props = regionprops(mito_labels)
 
@@ -478,7 +481,8 @@ def measurement(directory_path, save_path):
                                               cell_median_mito_area, cell_std_mito_area, cell_mean_mito_eccentricity,
                                               cell_median_mito_eccentricity, cell_std_mito_eccentricity,
                                               cell_mean_mito_equi_diameter, cell_median_mito_equi_diameter,
-                                              cell_std_mito_equi_diameter, cell_mean_mito_euler_number, cell_std_mito_euler_number,
+                                              cell_std_mito_equi_diameter, cell_mean_mito_euler_number,
+                                              cell_std_mito_euler_number,
                                               cell_mean_mito_extent, cell_median_mito_extent, cell_std_mito_extent,
                                               cell_mean_mito_major_axis, cell_median_mito_major_axis,
                                               cell_std_mito_major_axis,
@@ -538,7 +542,7 @@ def measurement(directory_path, save_path):
                                                      'cell_median_mito_equi_diameter_(pixels)',
                                                      'cell_std_mito_equi_diameter_(pixels)',
                                                      'cell_mean_mito_euler_number',
-                                                      'cell_std_mito_euler_number',
+                                                     'cell_std_mito_euler_number',
                                                      'cell_mean_mito_extent',
                                                      'cell_median_mito_extent', 'cell_std_mito_extent',
                                                      'cell_mean_mito_major_axis_(pixels)',
@@ -660,17 +664,21 @@ def measurement(directory_path, save_path):
 
                 database = database.append(temp_dataset, ignore_index=True)
                 database_raw = database_raw.append(temp_dataset_raw, ignore_index=True)
+
             except:
                 print('Cann\'t test {0}'.format(file))
     database.drop(database.index[0], inplace=True)
-    database.to_csv(save_path + '/' + "Distinct image test" + '.csv', sep=',', index=False)
+    database.to_csv(save_path + "/" + "Distinct image test" + "v.csv", sep=',', index=False)
+    database.to_csv("../final_results/512x512_pixels" + "/" + "Distinct image test" + "v.csv", sep=',', index=False)
 
     database_raw.drop(database_raw.index[0], inplace=True)
-    database_raw.to_csv(save_path + '/' + "Distinct mitochondria test" + '.tsv', sep='\t', index=False)
-
+    database_raw.to_csv(save_path + "/" + "Distinct mitochondria test" + ".tsv", sep='\t', index=False)
+    database_raw.to_csv("../final_results/512x512_pixels" + "/" + "Distinct mitochondria test" + ".tsv", sep='\t',
+                        index=False)
 
     print('Test has been completed')
 
-upload_path = "..\\final_results\\bw"
-save_floder = "..\\final_results"
+
+upload_path = "../final_results/bw"
+save_floder = "../results"
 measurement(upload_path, save_floder)

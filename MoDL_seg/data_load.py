@@ -24,17 +24,29 @@ class DataProcess(object):
     # create_train_data
     def create_train_data(self):
         i = 0
+        print('-' * 30)
+        print('Creating training images...')
+        print('-' * 30)
         imgs = glob.glob(self.data_path + "/*." + self.img_type)
+        print(len(imgs))
+
         imgdatas = np.ndarray((len(imgs), self.out_rows, self.out_cols, 1), dtype=np.uint8)
         imglabels = np.ndarray((len(imgs), self.out_rows, self.out_cols, 1), dtype=np.uint8)
         for imgname in imgs:
+
             midname = imgname[imgname.rindex("\\") + 1:]
             img = load_img(self.data_path + "/" + midname, color_mode='grayscale')
             label = load_img(self.label_path + "/" + midname, color_mode='grayscale')
             img = img_to_array(img)
             label = img_to_array(label)
+
+
             imgdatas[i] = img
             imglabels[i] = label
+            if i % 100 == 0:
+                print('Done: {0}/{1} images'.format(i, len(imgs)))
+            i += 1
+        print('loading done')
         np.save(self.npy_path + '/imgs_train.npy', imgdatas)
         np.save(self.npy_path + '/imgs_mask_train.npy', imglabels)
 

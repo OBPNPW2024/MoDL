@@ -20,7 +20,7 @@ MoDL is a deep learning-based software package for precise mitochondrial segment
 ***
 
 ## Executable file
-The executable files and usage instructions for MoDL can be found at "https://zenodo.org/records/10889134". 
+The executable files and usage instructions for MoDL can be found at "https://zenodo.org/records/10889134". The detailed procedure can be found in the ***operating process.doc*** file within the ***MoDL_OBP*** folder.
 
 ## Requirements
 

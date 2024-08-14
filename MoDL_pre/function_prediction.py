@@ -818,32 +818,21 @@ def prediction(new_samples_path, model_folder_path):
     averaged_results = results_with_id.groupby('image_name').mean().reset_index()
 
     averaged_results.to_csv("../final_results/function_predictions.csv", index=False)
+    averaged_results.to_csv("../results" + "/function_predictions.csv", index=False)
 
-    print("预测完成，结果已保存到 'final_predictions.csv'")
+    print("The results have been save to 'final_predictions.csv'")
 
 
 if __name__ == "__main__":
     clear_files("../final_results/512x512_pixels/")
-    parser = argparse.ArgumentParser(description="选择一个细胞系。")
-    parser.add_argument("--cell_lines", choices=["Hela", "HepG2", "143B", "L02", "U87"], help="细胞系的名称")
-
-    args = parser.parse_args()
-
-    if args.cell_lines:
-        cell_lines = args.cell_lines
-    else:
-        cell_lines = input("Please select a cell lines（Hela, HepG2, 143B, L02, U87）: ")
-
-
-
-    input_folder = "..\\final_results\\bw"
-    output_folder = "..\\final_results\\512x512_pixels"
+    input_folder = "../final_results/bw"
+    output_folder = "../final_results/512x512_pixels"
 #
     process_images_crop(input_folder, output_folder)
 #
     file_path = output_folder
     measurement(file_path)
 #
-    model_folder_path = f"..\\model\\{cell_lines}"
-    new_samples_path = output_folder +'\\Distinct image test.csv'  # 替换为新样本数据文件的路径
+    model_folder_path = f"../model/Hela"
+    new_samples_path = output_folder +'/Distinct image test.csv'  # 替换为新样本数据文件的路径
     prediction(new_samples_path, model_folder_path)

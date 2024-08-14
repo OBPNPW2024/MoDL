@@ -7,6 +7,7 @@ from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.models import *
 from tensorflow.keras.preprocessing.image import load_img, img_to_array, array_to_img
+import shutil
 
 
 def clear_files(folders):
@@ -63,8 +64,8 @@ def test(test_path):
     imgs = glob(test_path + "*")
     imgdatas = np.ndarray((len(imgs), output_pixel, output_pixel, 1), dtype=np.uint8)
     for imgname in imgs:
-        midname = imgname[imgname.rindex("\\") + 1:]
-        img = load_img(test_path + midname, color_mode='grayscale')
+        midname = imgname[imgname.rindex("/") + 1:]
+        img = load_img('../test/' + midname, color_mode='grayscale')
         img = img_to_array(img)
         imgdatas[i] = img
         i += 1
@@ -190,6 +191,18 @@ if __name__ == "__main__":
 
     # Paste patches onto the new image according to the specified positions and order
     final_results = '../final_results/'
+    
+    source_results = {'bw': '../final_results/bw', 'pseudo': '../final_results/pseudo'}
+    results_folder = '../results/'
+    for category, folder in source_results.items():
+        for filename in os.listdir(folder):
+            if filename.endswith('.tif'):
+                src_file_path = os.path.join(folder, filename)
+                results_filename = f"{filename.split('.')[0]}_{category}.tif"
+                dest_file_path = os.path.join(results_folder, results_filename)
+                shutil.copy(src_file_path, dest_file_path)
+    print("Images have been saved to 'final_results' and 'results'")
+
     clear_files(final_results)
     p_values = ["bw", "pseudo"]
     positions_44 = [(0, 0), (512, 0), (1024, 0), (1536, 0),
@@ -214,3 +227,6 @@ if __name__ == "__main__":
         stitch(f"../results/results_43/{p}/", f"../results/results_43/{p}_stitch/", positions_43, order_43, 12)
         stitch(f"../results/results_34/{p}/", f"../results/results_34/{p}_stitch/", positions_34, order_34, 12)
         merge_images(f'{p}_stitch', f'../final_results/{p}/')
+        
+
+    print("All done")
