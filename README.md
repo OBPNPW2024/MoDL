@@ -42,7 +42,7 @@ The inference process has been tested with:
 2. (Optional) If your computer has a CUDA-enabled GPU, install the CUDA and CUDNN of the proper version.
 3. The directory tree has been built. Download the MoDL_main.zip and unpack it, or clone the repository: 
 ```
-git clone https://github.com/OBPNPU2024/MoDL.git
+git clone https://github.com/OBPNPW2024/MoDL.git
 ```
 
 4. Open the terminal in the MoDL directory, install the required dependencies using pip:
