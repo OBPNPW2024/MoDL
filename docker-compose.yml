@@ -1,0 +1,19 @@
+services:
+  modl:
+    build: .
+    image: modl
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - ./testraw:/app/testraw
+      - ./model:/app/model
+      - ./deform:/app/deform
+      - ./results:/app/results
+      - ./final_results:/app/final_results

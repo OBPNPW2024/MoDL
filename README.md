@@ -59,7 +59,33 @@ pip install tensorflow-gpu=2.5.0
 
 The installation takes about 10 minutes in the tested platform. The time could be longer due to the network states.
 
-*** 
+***
+
+## Docker (Optional)
+
+A Dockerfile is provided as an alternative to manual installation, bundling all dependencies including TensorFlow and CUDA/cuDNN runtime libraries.
+
+1. Install Docker. An NVIDIA GPU with the NVIDIA Container Toolkit is optional but recommended for faster inference.
+2. Build the image from the project directory:
+
+```
+docker build -t modl .
+```
+
+3. Run the container in your MoDL directory:
+
+```
+docker compose run modl
+
+```
+
+On systems without an NVIDIA GPU, run:
+
+```
+docker compose -f docker-compose.yml -f docker-compose.cpu.yml run modl
+```
+
+***
 
 ##Usage
 To use this project, follow these steps:
