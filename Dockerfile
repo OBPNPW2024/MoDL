@@ -6,6 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.8 python3-pip git \
     libgl1 libglib2.0-0 \
+    libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
