@@ -59,9 +59,35 @@ pip install tensorflow-gpu=2.5.0
 
 The installation takes about 10 minutes in the tested platform. The time could be longer due to the network states.
 
-*** 
+***
 
-##Usage
+## Docker (Optional)
+
+A Dockerfile is provided as an alternative to manual installation, bundling all dependencies including TensorFlow and CUDA/cuDNN runtime libraries.
+
+1. Install Docker. An NVIDIA GPU with the NVIDIA Container Toolkit is optional but recommended for faster inference.
+2. Build the image from the project directory:
+
+```
+docker build -t modl .
+```
+
+3. Run the container in your MoDL directory:
+
+```
+docker compose run modl
+
+```
+
+On systems without an NVIDIA GPU, run:
+
+```
+docker compose -f docker-compose.yml -f docker-compose.cpu.yml run modl
+```
+
+***
+
+## Usage
 To use this project, follow these steps:
 
 (1) For mitochondrial segmentation part
@@ -88,8 +114,8 @@ You need to prepare the training set, segment it into 8-bit images using MoDL, a
 4. Prepare the test images and use the trained model to make predictions by running ***MoDL_pre/function prediction.py***. Here, we have prepared data for five cell lines: HeLa, HepG2, U87, L02, and 143B. After running ***function_prediction.py***, you will be prompted to input the name of the cell line. The predictions will be stored in the ***function_predictions.csv*** file within the *'final_results'* directory. 
 
 ***
-##**A specific file description are as follows:**
-##Data Preparation
+## **A specific file description are as follows:**
+## Data Preparation
 1. To reduce computational cost and improves training efficiency, the original full 2048×2048 pixels images were cropped into multiple 512×512 pixels patches.
 
 2. Place the training images (512x512 pixels) in the *' deform/train '* directory for mitochondrial segmentation. Place the training ***.csv*** file in the *' deform/function_pre '* directory for mitochondrial function prediction. 
@@ -97,7 +123,7 @@ You need to prepare the training set, segment it into 8-bit images using MoDL, a
 3. Place the corresponding labels in the *' deform/label '* directory, run the ***data_load.py*** to convert the images and labels into .npy format.
 
 
-##Model Training
+## Model Training
 1. Run the ***MoDL_seg/train.py*** to train the model for segmentation. Run the ***MoDL_pre/train.py*** to train the model for function prediction.
 
 2. The trained model will be saved in the *'model'* directory and named ***U-RNet+.hdf5*** for segmentation. The ***.pkl*** file will be saved in the *'model'* directory for function prediction.
@@ -105,7 +131,7 @@ You need to prepare the training set, segment it into 8-bit images using MoDL, a
 3. The training progress and performance metrics will also be saved in the *'model'* directory after training.
 
 
-##Model Prediction
+## Model Prediction
 1. Place the test images (2048x2048 pixels) to be segmented in the *' testraw '* directory.
 
 2. Run the ***MoDL_seg/segment_predict.py*** to make segmentation using the trained model.
@@ -116,7 +142,7 @@ You need to prepare the training set, segment it into 8-bit images using MoDL, a
 
 5. Run the ***MoDL_pre/function_prediction.py*** script to generate the ***function_prediction.csv*** results file and stored in the `'final_results'` directory.
 
-##Contributing
+## Contributing
 Contributions to this project are welcome! 
 
 Here are a few ways you can contribute:
@@ -124,6 +150,6 @@ Report bugs or suggest improvements by creating a new issue.
 Implement new features or fix existing issues by creating a pull request.
 
 
-##License
+## License
 This project is covered under the GNU General Public 3.0 License.
 
